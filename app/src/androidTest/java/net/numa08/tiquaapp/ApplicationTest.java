@@ -1,4 +1,4 @@
-package net.numa08.tiquaapp;
+package net.numa08.tiqavapp;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

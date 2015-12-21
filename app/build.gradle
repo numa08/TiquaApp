@@ -23,21 +23,19 @@ android {
     }
 }
 
+def powerMockVersion = '1.6.3'
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-}
-buildscript {
-    ext.kotlin_version = '1.0.0-beta-3595'
-    repositories {
-        mavenCentral()
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlin_version"
+    compile project(path: ':tiqa4k')
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile "org.powermock:powermock-module-junit4:${powerMockVersion}"
+    testCompile "org.powermock:powermock-module-junit4-rule:${powerMockVersion}"
+    testCompile("org.powermock:powermock-api-mockito:${powerMockVersion}") {
+        exclude module: 'mockito-all'
     }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-repositories {
-    mavenCentral()
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile "org.powermock:powermock-classloading-xstream:${powerMockVersion}"
 }

@@ -1,1 +1,1 @@
-include ':app', ':tiqa4k'
+include ':app', ':tiqa4k', ':tiqa4k-test'
