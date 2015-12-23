@@ -3,7 +3,7 @@ package net.numa08.tiqavapp.service;
 import android.util.Log;
 
 import net.numa08.tiqa4k.Tiqav;
-import net.numa08.tiqavapp.CacheRealmConfiguration;
+import net.numa08.tiqavapp.CacheRealmConfigurator;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
@@ -17,7 +17,7 @@ import rx.Observer;
 public class LoadTiqavObserverImpl implements LoadTiqavObserver {
 
     @Bean
-    CacheRealmConfiguration cacheRealmConfiguration;
+    CacheRealmConfigurator cacheRealmConfigurator;
 
     @Override
     public Observer<Tiqav[]> getObserver() {
@@ -34,7 +34,7 @@ public class LoadTiqavObserverImpl implements LoadTiqavObserver {
 
             @Override
             public void onNext(Tiqav[] tiqavs) {
-                final Realm realm = Realm.getInstance(cacheRealmConfiguration.getRealmConfiguration());
+                final Realm realm = Realm.getInstance(cacheRealmConfigurator.getRealmConfiguration());
                 realm.executeTransaction(r -> r.copyToRealmOrUpdate(Arrays.asList(tiqavs)));
                 realm.close();
                 Log.d("tiqav", "save tiqav");

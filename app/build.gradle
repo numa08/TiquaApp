@@ -30,7 +30,7 @@ android {
     }
 }
 
-def powerMockVersion = '1.6.3'
+def powerMockVersion = '1.6.4'
 def AAVersion = '3.3.2'
 def supportVersion = '23.1.1'
 dependencies {

@@ -9,11 +9,11 @@ import org.androidannotations.annotations.EBean;
 import io.realm.RealmConfiguration;
 
 @EBean
-public class CacheRealmConfiguration {
+public class CacheRealmConfigurator {
 
     private final RealmConfiguration realmConfiguration;
 
-    public CacheRealmConfiguration(Context context) {
+    public CacheRealmConfigurator(Context context) {
         realmConfiguration = new RealmConfiguration.Builder(context.getCacheDir())
                 .setModules(new Module())
                 .build();

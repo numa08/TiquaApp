@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import net.numa08.tiqavapp.CacheRealmConfiguration;
+import net.numa08.tiqavapp.CacheRealmConfigurator;
 import net.numa08.tiqavapp.R;
 import net.numa08.tiqavapp.service.LoadTiqavService_;
 
@@ -18,7 +18,7 @@ import org.androidannotations.annotations.OptionsMenu;
 public class TiqavListFragment extends Fragment{
 
     @Bean
-    CacheRealmConfiguration cacheRealmConfiguration;
+    CacheRealmConfigurator cacheRealmConfigurator;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
