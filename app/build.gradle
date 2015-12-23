@@ -32,10 +32,12 @@ android {
 
 def powerMockVersion = '1.6.3'
 def AAVersion = '3.3.2'
+def supportVersion = '23.1.1'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile "com.android.support:appcompat-v7:${supportVersion}"
+    compile "com.android.support:recyclerview-v7:${supportVersion}"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlin_version"
     compile project(path: ':tiqa4k')
     testCompile 'org.robolectric:robolectric:3.0'
