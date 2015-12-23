@@ -7,9 +7,9 @@
         android:label="@string/app_name"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <service android:name="net.numa08.tiqavapp.service.LoadTiqavService"/>
+        <service android:name="net.numa08.tiqavapp.service.LoadTiqavService_"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity_"
             android:configChanges="orientation|screenLayout"
             android:label="@string/app_name">
             <intent-filter>
