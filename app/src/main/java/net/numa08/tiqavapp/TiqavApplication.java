@@ -1,7 +1,6 @@
 package net.numa08.tiqavapp;
 
 import android.app.Application;
-import android.support.annotation.VisibleForTesting;
 
 public class TiqavApplication extends Application {
     private static TiqavApplication self;
@@ -10,8 +9,7 @@ public class TiqavApplication extends Application {
         return self;
     }
 
-    @VisibleForTesting
-    public ApplicationComponent applicationComponent;
+    private ApplicationComponent applicationComponent;
 
     public ApplicationComponent getComponent() {
         return applicationComponent;
