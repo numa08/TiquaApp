@@ -1,16 +1,12 @@
-package net.numa08.tiqavapp;
+package net.numa08.tiqavapp.realm.configurator;
 
 import android.content.Context;
 
 import net.numa08.tiqa4k.Module;
 
-import org.androidannotations.annotations.EBean;
-
 import io.realm.RealmConfiguration;
 
-@EBean
 public class CacheRealmConfigurator {
-
     private final RealmConfiguration realmConfiguration;
 
     public CacheRealmConfigurator(Context context) {
@@ -22,4 +18,5 @@ public class CacheRealmConfigurator {
     public RealmConfiguration getRealmConfiguration() {
         return realmConfiguration;
     }
+
 }

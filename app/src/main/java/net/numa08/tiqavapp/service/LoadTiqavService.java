@@ -1,33 +1,66 @@
 package net.numa08.tiqavapp.service;
 
-import net.numa08.tiqavapp.TiqavServiceConfiguration;
+import android.util.Log;
 
-import org.androidannotations.annotations.Bean;
+import net.numa08.tiqa4k.Tiqav;
+import net.numa08.tiqa4k.TiqavService;
+import net.numa08.tiqavapp.TiqavApplication;
+import net.numa08.tiqavapp.realm.configurator.CacheRealmConfigurator;
+
 import org.androidannotations.annotations.EIntentService;
 import org.androidannotations.annotations.ServiceAction;
 import org.androidannotations.api.support.app.AbstractIntentService;
 
+import java.util.Arrays;
+
+import javax.inject.Inject;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 @EIntentService
 public class LoadTiqavService extends AbstractIntentService{
 
-    @Bean
-    TiqavServiceConfiguration tiqavServiceConfiguration;
-    @Bean(LoadTiqavObserverImpl.class)
-    LoadTiqavObserver loadTiqavObserver;
+    @Inject
+    TiqavService tiqavService;
+    @Inject
+    CacheRealmConfigurator cacheRealmConfigurator;
 
 
     public LoadTiqavService() {
         super("LoadTiqavService");
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        TiqavApplication.getInstance().getComponent().inject(this);
+    }
+
     @ServiceAction
     void loadNewest() {
-        tiqavServiceConfiguration
-                .getService()
+        tiqavService
                 .newest()
-                .observeOn(Schedulers.newThread())
-                .subscribe(loadTiqavObserver.getObserver());
+                .subscribe(new Observer<Tiqav[]>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d("tiqav", "complete TiqavService:newest");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("tiqav", "cache error on TiqavService:newest");
+                    }
+
+                    @Override
+                    public void onNext(Tiqav[] tiqavs) {
+                        final Realm realm = Realm.getInstance(cacheRealmConfigurator.getRealmConfiguration());
+                        realm.executeTransaction(r -> r.copyToRealmOrUpdate(Arrays.asList(tiqavs)));
+                        realm.close();
+                    }
+                });
     }
 }

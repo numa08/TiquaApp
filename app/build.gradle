@@ -33,6 +33,7 @@ android {
 def powerMockVersion = '1.6.4'
 def AAVersion = '3.3.2'
 def supportVersion = '23.1.1'
+def daggerVersion = '2.0'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -50,6 +51,9 @@ dependencies {
     testCompile "org.powermock:powermock-classloading-xstream:${powerMockVersion}"
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile "com.google.dagger:dagger:$daggerVersion"
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided "javax.annotation:javax.annotation-api:1.2"
 }
 
 apt {
