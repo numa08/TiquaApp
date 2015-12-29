@@ -7,8 +7,8 @@ import net.numa08.tiqa4k.Tiqav
 import net.numa08.tiqa4k.mock.mockNewest
 import net.numa08.tiqavapp.BuildConfig
 import net.numa08.tiqavapp.CustomRoboRunner
-import net.numa08.tiqavapp.TestApplication
 import net.numa08.tiqavapp.realm.configurator.CacheRealmConfigurator
+import net.numa08.tiqavapp.utils.LoggingRule
 import net.numa08.tiqavapp.utils.loadJSON
 import org.apache.maven.artifact.ant.shaded.IOUtil
 import org.hamcrest.core.Is
@@ -25,17 +25,18 @@ import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.modules.junit4.rule.PowerMockRule
 import org.robolectric.Robolectric
 import org.robolectric.annotation.Config
-import org.robolectric.shadows.ShadowLog
 import java.util.*
 
 @RunWith(CustomRoboRunner::class)
-@Config(manifest = Config.NONE, sdk = intArrayOf(Build.VERSION_CODES.LOLLIPOP), constants = BuildConfig::class, application = TestApplication::class)
+@Config(manifest = Config.NONE, sdk = intArrayOf(Build.VERSION_CODES.LOLLIPOP), constants = BuildConfig::class)
 @PowerMockIgnore("org.mockito.*", "org.robolectric.*", "android.*")
 @PrepareForTest(Realm::class, RealmFactory::class,CacheRealmConfigurator::class)
 public class LoadTiqavServiceTest{
 
     @get:Rule
     public val rule = PowerMockRule()
+    @get:Rule
+    public val log = LoggingRule()
 
     var realm: Realm? = null
 
@@ -45,11 +46,6 @@ public class LoadTiqavServiceTest{
         realm = PowerMockito.mock(Realm::class.java)
         PowerMockito.`when`(RealmFactory.getInstance(Matchers.any())).thenReturn(realm)
    }
-
-    @Before
-    public fun log() {
-        ShadowLog.stream = System.out
-    }
 
     @Test
     public fun loadNewest() {
