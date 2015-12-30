@@ -35,7 +35,7 @@ public class LoadTiqavService extends AbstractIntentService{
     @Override
     public void onCreate() {
         super.onCreate();
-        TiqavApplication.getInstance().getComponent().inject(this);
+        TiqavApplication.getApplication().getComponent().inject(this);
     }
 
     @ServiceAction

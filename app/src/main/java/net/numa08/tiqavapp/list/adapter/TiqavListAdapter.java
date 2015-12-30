@@ -1,7 +1,6 @@
 package net.numa08.tiqavapp.list.adapter;
 
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,18 +19,17 @@ public class TiqavListAdapter extends RealmBaseRecyclerAdapter<Tiqav, TiqavListV
 
     @Override
     public TiqavListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final ImageView imageView = new ImageView(parent.getContext());
-        return new TiqavListViewHolder(imageView);
+        final TiqavListRow view = TiqavListRow_.build(parent.getContext());
+        view.setPicasso(picasso);
+        return new TiqavListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(TiqavListViewHolder holder, int position) {
         final Tiqav tiqav = realmResults.get(position);
-        picasso
-            .load(tiqav.getSourceURL())
-            .into(holder.content);
-
+        holder.content.setTiqav(tiqav);
     }
+
 
     @Override
     public int getItemCount() {

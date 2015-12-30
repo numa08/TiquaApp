@@ -48,7 +48,7 @@ public class TiqavListFragment extends Fragment {
                 .intent(getContext())
                 .loadNewest()
                 .start();
-        ((TiqavApplication) getContext().getApplicationContext()).getComponent().inject(this);
+       TiqavApplication.getApplication().getComponent().inject(this);
         cacheRealm = RealmFactory.getInstance(cacheRealmConfigurator.getRealmConfiguration());
     }
 

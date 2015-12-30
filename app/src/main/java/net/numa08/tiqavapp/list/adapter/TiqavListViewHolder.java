@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 class TiqavListViewHolder extends RecyclerView.ViewHolder {
-    public final ImageView content;
-    public TiqavListViewHolder(ImageView itemView) {
+    public final TiqavListRow content;
+    public TiqavListViewHolder(TiqavListRow itemView) {
         super(itemView);
         content = itemView;
     }
