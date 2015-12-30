@@ -2,26 +2,24 @@ package net.numa08.tiqavapp.list.adapter;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import net.numa08.tiqa4k.Tiqav;
+import net.numa08.tiqa4k.UtilsKt;
 import net.numa08.tiqavapp.R;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.DimensionPixelSizeRes;
 
 @EViewGroup(R.layout.view_tiqav_list_row)
 public class TiqavListRow extends LinearLayout {
 
-    @ViewById(R.id.text)
-    TextView textView;
-    @DimensionPixelSizeRes(R.dimen.min_tiqav_row_height)
-    int minTiqavRowHeight;
+    @ViewById(R.id.image)
+    ImageView imageView;
 
     private Tiqav tiqav;
     private Picasso picasso;
@@ -45,7 +43,6 @@ public class TiqavListRow extends LinearLayout {
 
     private void init() {
         setOrientation(LinearLayout.VERTICAL);
-        setMinimumHeight(minTiqavRowHeight);
     }
 
     @Override
@@ -78,6 +75,9 @@ public class TiqavListRow extends LinearLayout {
         if (tiqav == null) {
             return;
         }
-        textView.setText(tiqav.getSourceURL());
+        final String url = UtilsKt.imageURL(tiqav);
+        picasso
+            .load(url)
+            .into(imageView);
     }
 }
